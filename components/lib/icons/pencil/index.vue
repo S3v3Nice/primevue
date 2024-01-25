@@ -19,6 +19,11 @@ import BaseIcon from 'primevue/baseicon';
 
 export default {
     name: 'PencilIcon',
-    extends: BaseIcon
+    extends: BaseIcon,
+    computed: {
+        pathId() {
+            return `pv_icon_clip_${this.id}`;
+        }
+    }
 };
 </script>
