@@ -112,7 +112,7 @@ import OverlayEventBus from 'primevue/overlayeventbus';
 import Portal from 'primevue/portal';
 import Ripple from 'primevue/ripple';
 import Tree from 'primevue/tree';
-import { ConnectedOverlayScrollHandler, DomHandler, UniqueComponentId, ZIndexUtils } from 'primevue/utils';
+import { ConnectedOverlayScrollHandler, DomHandler, ZIndexUtils } from 'primevue/utils';
 import BaseTreeSelect from './BaseTreeSelect.vue';
 
 export default {
@@ -488,7 +488,7 @@ export default {
             return !this.options || this.options.length === 0;
         },
         listId() {
-            return UniqueComponentId() + '_list';
+            return this.id + '_list';
         }
     },
     components: {

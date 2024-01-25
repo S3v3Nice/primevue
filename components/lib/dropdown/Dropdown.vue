@@ -186,7 +186,7 @@ import TimesIcon from 'primevue/icons/times';
 import OverlayEventBus from 'primevue/overlayeventbus';
 import Portal from 'primevue/portal';
 import Ripple from 'primevue/ripple';
-import { ConnectedOverlayScrollHandler, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from 'primevue/utils';
+import { ConnectedOverlayScrollHandler, DomHandler, ObjectUtils, ZIndexUtils } from 'primevue/utils';
 import VirtualScroller from 'primevue/virtualscroller';
 import BaseDropdown from './BaseDropdown.vue';
 
@@ -206,7 +206,6 @@ export default {
     isModelValueChanged: false,
     data() {
         return {
-            id: this.$attrs.id,
             clicked: false,
             focused: false,
             focusedOptionIndex: -1,
@@ -215,9 +214,6 @@ export default {
         };
     },
     watch: {
-        '$attrs.id': function (newValue) {
-            this.id = newValue || UniqueComponentId();
-        },
         modelValue() {
             this.isModelValueChanged = true;
         },
@@ -226,7 +222,6 @@ export default {
         }
     },
     mounted() {
-        this.id = this.id || UniqueComponentId();
         this.autoUpdateModel();
         this.bindLabelClickListener();
     },

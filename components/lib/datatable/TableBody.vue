@@ -71,7 +71,7 @@
 
 <script>
 import BaseComponent from 'primevue/basecomponent';
-import { DomHandler, UniqueComponentId } from 'primevue/utils';
+import { DomHandler } from 'primevue/utils';
 import BodyRow from './BodyRow.vue';
 
 export default {
@@ -287,10 +287,10 @@ export default {
             };
         },
         expandedRowId() {
-            return UniqueComponentId();
+            return this.id + '_expandedrow';
         },
         nameAttributeSelector() {
-            return UniqueComponentId();
+            return this.id + '_name';
         }
     },
     components: {

@@ -10,7 +10,7 @@
             :aria-label="filterMenuButtonAriaLabel"
             aria-haspopup="true"
             :aria-expanded="overlayVisible"
-            :aria-controls="overlayId"
+            :aria-controls="id"
             :class="cx('filterMenuButton')"
             @click="toggleMenu($event)"
             @keydown="onToggleButtonKeyDown($event)"
@@ -26,7 +26,7 @@
                 <div
                     v-if="overlayVisible"
                     :ref="overlayRef"
-                    :id="overlayId"
+                    :id="id"
                     v-focustrap
                     :aria-modal="overlayVisible"
                     role="dialog"
@@ -177,7 +177,7 @@ import PlusIcon from 'primevue/icons/plus';
 import TrashIcon from 'primevue/icons/trash';
 import OverlayEventBus from 'primevue/overlayeventbus';
 import Portal from 'primevue/portal';
-import { ConnectedOverlayScrollHandler, DomHandler, UniqueComponentId, ZIndexUtils } from 'primevue/utils';
+import { ConnectedOverlayScrollHandler, DomHandler, ZIndexUtils } from 'primevue/utils';
 import { mergeProps } from 'vue';
 
 export default {
@@ -633,9 +633,6 @@ export default {
     computed: {
         showMenuButton() {
             return this.showMenu && (this.display === 'row' ? this.type !== 'boolean' : true);
-        },
-        overlayId() {
-            return UniqueComponentId();
         },
         matchModes() {
             return (

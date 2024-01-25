@@ -83,10 +83,6 @@ export default {
         templates: {
             type: null,
             default: null
-        },
-        id: {
-            type: String,
-            default: null
         }
     },
     mounted() {

@@ -1,6 +1,6 @@
 <script>
 import BaseStyle from 'primevue/base/style';
-import { ObjectUtils } from 'primevue/utils';
+import { ObjectUtils, UniqueComponentId } from 'primevue/utils';
 import { mergeProps } from 'vue';
 import BaseComponentStyle from './style/BaseComponentStyle';
 
@@ -25,7 +25,15 @@ export default {
             default: undefined
         }
     },
+    data() {
+        return {
+            id: this.$attrs.id
+        };
+    },
     watch: {
+        '$attrs.id': function (newValue) {
+            this.id = newValue || UniqueComponentId();
+        },
         isUnstyled: {
             immediate: true,
             handler(newValue) {
@@ -58,6 +66,7 @@ export default {
         this._hook('onBeforeMount');
     },
     mounted() {
+        this.id = this.id || UniqueComponentId();
         this._hook('onMounted');
     },
     beforeUpdate() {

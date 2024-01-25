@@ -52,7 +52,7 @@
 import BanIcon from 'primevue/icons/ban';
 import StarIcon from 'primevue/icons/star';
 import StarFillIcon from 'primevue/icons/starfill';
-import { DomHandler, UniqueComponentId } from 'primevue/utils';
+import { DomHandler } from 'primevue/utils';
 import BaseRating from './BaseRating.vue';
 
 export default {
@@ -68,11 +68,11 @@ export default {
     },
     watch: {
         '$attrs.name': function (newValue) {
-            this.name = newValue || UniqueComponentId();
+            this.name = newValue || this.id;
         }
     },
     mounted() {
-        this.name = this.name || UniqueComponentId();
+        this.name = this.name || this.id;
     },
     methods: {
         getPTOptions(key, value) {

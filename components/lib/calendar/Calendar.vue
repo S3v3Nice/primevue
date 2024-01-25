@@ -518,7 +518,7 @@ import ChevronUpIcon from 'primevue/icons/chevronup';
 import OverlayEventBus from 'primevue/overlayeventbus';
 import Portal from 'primevue/portal';
 import Ripple from 'primevue/ripple';
-import { ConnectedOverlayScrollHandler, DomHandler, UniqueComponentId, ZIndexUtils } from 'primevue/utils';
+import { ConnectedOverlayScrollHandler, DomHandler, ZIndexUtils } from 'primevue/utils';
 import BaseCalendar from './BaseCalendar.vue';
 
 export default {
@@ -605,7 +605,7 @@ export default {
         this.bindMatchMediaListener();
 
         if (this.inline) {
-            this.overlay && this.overlay.setAttribute(this.attributeSelector, '');
+            this.overlay && this.overlay.setAttribute(this.id, '');
 
             if (!this.disabled) {
                 this.preventFocus = true;
@@ -839,7 +839,7 @@ export default {
             return validMin && validMax && validDate && validDay;
         },
         onOverlayEnter(el) {
-            el.setAttribute(this.attributeSelector, '');
+            el.setAttribute(this.id, '');
             const styles = this.touchUI ? { position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' } : !this.inline ? { position: 'absolute', top: '0', left: '0' } : undefined;
 
             DomHandler.addStyles(el, styles);
@@ -2740,14 +2740,14 @@ export default {
                     for (let i = 0; i < responsiveOptions.length; i++) {
                         let { breakpoint, numMonths } = responsiveOptions[i];
                         let styles = `
-                            .p-datepicker[${this.attributeSelector}] .p-datepicker-group:nth-child(${numMonths}) .p-datepicker-next {
+                            .p-datepicker[${this.id}] .p-datepicker-group:nth-child(${numMonths}) .p-datepicker-next {
                                 display: inline-flex;
                             }
                         `;
 
                         for (let j = numMonths; j < this.numberOfMonths; j++) {
                             styles += `
-                                .p-datepicker[${this.attributeSelector}] .p-datepicker-group:nth-child(${j + 1}) {
+                                .p-datepicker[${this.id}] .p-datepicker-group:nth-child(${j + 1}) {
                                     display: none;
                                 }
                             `;
@@ -2994,14 +2994,11 @@ export default {
         monthNames() {
             return this.$primevue.config.locale.monthNames;
         },
-        attributeSelector() {
-            return UniqueComponentId();
-        },
         switchViewButtonDisabled() {
             return this.numberOfMonths > 1 || this.disabled;
         },
         panelId() {
-            return UniqueComponentId() + '_panel';
+            return this.id + '_panel';
         }
     },
     components: {

@@ -6,9 +6,6 @@ export default {
     name: 'BaseSteps',
     extends: BaseComponent,
     props: {
-        id: {
-            type: String
-        },
         model: {
             type: Array,
             default: null

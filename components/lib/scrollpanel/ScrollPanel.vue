@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { DomHandler, UniqueComponentId } from 'primevue/utils';
+import { DomHandler } from 'primevue/utils';
 import BaseScrollPanel from './BaseScrollPanel.vue';
 
 export default {
@@ -61,7 +61,6 @@ export default {
     outsideClickListener: null,
     data() {
         return {
-            id: UniqueComponentId(),
             orientation: 'vertical',
             lastScrollTop: 0,
             lastScrollLeft: 0
@@ -362,7 +361,7 @@ export default {
     },
     computed: {
         contentId() {
-            return UniqueComponentId() + '_content';
+            return this.id + '_content';
         }
     }
 };

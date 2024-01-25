@@ -24,7 +24,7 @@
 <script>
 import Portal from 'primevue/portal';
 import ToastEventBus from 'primevue/toasteventbus';
-import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from 'primevue/utils';
+import { DomHandler, ObjectUtils, ZIndexUtils } from 'primevue/utils';
 import BaseToast from './BaseToast.vue';
 import ToastMessage from './ToastMessage.vue';
 
@@ -101,7 +101,7 @@ export default {
             this.messages = [];
         },
         onEnter() {
-            this.$refs.container.setAttribute(this.attributeSelector, '');
+            this.$refs.container.setAttribute(this.id, '');
 
             if (this.autoZIndex) {
                 ZIndexUtils.set('modal', this.$refs.container, this.baseZIndex || this.$primevue.config.zIndex.modal);
@@ -132,7 +132,7 @@ export default {
 
                     innerHTML += `
                         @media screen and (max-width: ${breakpoint}) {
-                            .p-toast[${this.attributeSelector}] {
+                            .p-toast[${this.id}] {
                                 ${breakpointStyle}
                             }
                         }
@@ -147,11 +147,6 @@ export default {
                 document.head.removeChild(this.styleElement);
                 this.styleElement = null;
             }
-        }
-    },
-    computed: {
-        attributeSelector() {
-            return UniqueComponentId();
         }
     },
     components: {

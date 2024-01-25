@@ -1,7 +1,7 @@
 <template>
     <li
         v-if="visible()"
-        :id="id"
+        :id="itemId"
         :class="[cx('menuitem'), item.class]"
         role="menuitem"
         :style="item.style"
@@ -39,7 +39,7 @@ export default {
     props: {
         item: null,
         templates: null,
-        id: null,
+        itemId: null,
         focusedOptionId: null,
         index: null
     },
@@ -58,13 +58,13 @@ export default {
             });
         },
         isItemFocused() {
-            return this.focusedOptionId === this.id;
+            return this.focusedOptionId === this.itemId;
         },
         onItemClick(event) {
             const command = this.getItemProp(this.item, 'command');
 
             command && command({ originalEvent: event, item: this.item.item });
-            this.$emit('item-click', { originalEvent: event, item: this.item, id: this.id });
+            this.$emit('item-click', { originalEvent: event, item: this.item, id: this.itemId });
         },
         visible() {
             return typeof this.item.visible === 'function' ? this.item.visible() : this.item.visible !== false;

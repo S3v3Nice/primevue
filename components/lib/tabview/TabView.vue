@@ -95,7 +95,7 @@
 import ChevronLeftIcon from 'primevue/icons/chevronleft';
 import ChevronRightIcon from 'primevue/icons/chevronright';
 import Ripple from 'primevue/ripple';
-import { DomHandler, UniqueComponentId } from 'primevue/utils';
+import { DomHandler } from 'primevue/utils';
 import { mergeProps } from 'vue';
 import BaseTabView from './BaseTabView.vue';
 
@@ -105,16 +105,12 @@ export default {
     emits: ['update:activeIndex', 'tab-change', 'tab-click'],
     data() {
         return {
-            id: this.$attrs.id,
             d_activeIndex: this.activeIndex,
             isPrevButtonDisabled: true,
             isNextButtonDisabled: false
         };
     },
     watch: {
-        '$attrs.id': function (newValue) {
-            this.id = newValue || UniqueComponentId();
-        },
         activeIndex(newValue) {
             this.d_activeIndex = newValue;
 
@@ -122,7 +118,6 @@ export default {
         }
     },
     mounted() {
-        this.id = this.id || UniqueComponentId();
         this.updateInkBar();
         this.scrollable && this.updateButtonState();
     },

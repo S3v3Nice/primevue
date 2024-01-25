@@ -64,7 +64,7 @@ import WindowMaximizeIcon from 'primevue/icons/windowmaximize';
 import WindowMinimizeIcon from 'primevue/icons/windowminimize';
 import Portal from 'primevue/portal';
 import Ripple from 'primevue/ripple';
-import { DomHandler, UniqueComponentId, ZIndexUtils } from 'primevue/utils';
+import { DomHandler, ZIndexUtils } from 'primevue/utils';
 import { computed } from 'vue';
 import BaseDialog from './BaseDialog.vue';
 
@@ -378,9 +378,8 @@ export default {
         maximizeIconComponent() {
             return this.maximized ? (this.minimizeIcon ? 'span' : 'WindowMinimizeIcon') : this.maximizeIcon ? 'span' : 'WindowMaximizeIcon';
         },
-
         ariaId() {
-            return UniqueComponentId();
+            return this.id + '_ariaId';
         },
         ariaLabelledById() {
             return this.header != null || this.$attrs['aria-labelledby'] !== null ? this.ariaId + '_header' : null;
@@ -389,7 +388,7 @@ export default {
             return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.close : undefined;
         },
         attributeSelector() {
-            return UniqueComponentId();
+            return this.id + '_attributeSelector';
         }
     },
     directives: {

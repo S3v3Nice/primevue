@@ -15,7 +15,6 @@
 <script>
 import Dialog from 'primevue/dialog';
 import DynamicDialogEventBus from 'primevue/dynamicdialogeventbus';
-import { UniqueComponentId } from 'primevue/utils';
 import BaseDynamicDialog from './BaseDynamicDialog.vue';
 
 export default {
@@ -32,7 +31,7 @@ export default {
     currentInstance: null,
     mounted() {
         this.openListener = ({ instance }) => {
-            const key = UniqueComponentId() + '_dynamic_dialog';
+            const key = this.id + '_dynamic_dialog';
 
             instance.visible = true;
             instance.key = key;

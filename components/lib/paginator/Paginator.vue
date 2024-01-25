@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { DomHandler, UniqueComponentId } from 'primevue/utils';
+import { DomHandler } from 'primevue/utils';
 import BasePaginator from './BasePaginator.vue';
 import CurrrentPageReport from './CurrentPageReport.vue';
 import FirstPageLink from './FirstPageLink.vue';
@@ -173,7 +173,7 @@ export default {
                     if (key === 'default') {
                         innerHTML += `
                             @media screen ${minValue} {
-                                .paginator[${this.attributeSelector}],
+                                .paginator[${this.id}],
                                 .p-paginator-default{
                                     display: flex;
                                 }
@@ -181,14 +181,14 @@ export default {
                         `;
                     } else {
                         innerHTML += `
-.paginator[${this.attributeSelector}], .p-paginator-${key} {
+.paginator[${this.id}], .p-paginator-${key} {
     display: none;
 }
 @media screen ${minValue} and (max-width: ${key}) {
-    .paginator[${this.attributeSelector}], .p-paginator-${key} {
+    .paginator[${this.id}], .p-paginator-${key} {
         display: flex;
     }
-    .paginator[${this.attributeSelector}],
+    .paginator[${this.id}],
     .p-paginator-default{
         display: none;
     }
@@ -206,7 +206,7 @@ export default {
         setPaginatorAttribute() {
             if (this.$refs.paginator && this.$refs.paginator.length >= 0) {
                 [...this.$refs.paginator].forEach((el) => {
-                    el.setAttribute(this.attributeSelector, '');
+                    el.setAttribute(this.id, '');
                 });
             }
         },
@@ -291,9 +291,6 @@ export default {
         },
         currentPage() {
             return this.pageCount > 0 ? this.page + 1 : 0;
-        },
-        attributeSelector() {
-            return UniqueComponentId();
         }
     },
     components: {

@@ -24,7 +24,7 @@ import TimesIcon from 'primevue/icons/times';
 import OverlayEventBus from 'primevue/overlayeventbus';
 import Portal from 'primevue/portal';
 import Ripple from 'primevue/ripple';
-import { ConnectedOverlayScrollHandler, DomHandler, UniqueComponentId, ZIndexUtils } from 'primevue/utils';
+import { ConnectedOverlayScrollHandler, DomHandler, ZIndexUtils } from 'primevue/utils';
 import BaseOverlayPanel from './BaseOverlayPanel.vue';
 
 export default {
@@ -106,7 +106,7 @@ export default {
             this.selfClick = true;
         },
         onEnter(el) {
-            this.container.setAttribute(this.attributeSelector, '');
+            this.container.setAttribute(this.id, '');
             DomHandler.addStyles(el, { position: 'absolute', top: '0', left: '0' });
             this.alignOverlay();
 
@@ -280,7 +280,7 @@ export default {
                 for (let breakpoint in this.breakpoints) {
                     innerHTML += `
                         @media screen and (max-width: ${breakpoint}) {
-                            .p-overlaypanel[${this.attributeSelector}] {
+                            .p-overlaypanel[${this.id}] {
                                 width: ${this.breakpoints[breakpoint]} !important;
                             }
                         }
@@ -304,9 +304,6 @@ export default {
         }
     },
     computed: {
-        attributeSelector() {
-            return UniqueComponentId();
-        },
         closeAriaLabel() {
             return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.close : undefined;
         }

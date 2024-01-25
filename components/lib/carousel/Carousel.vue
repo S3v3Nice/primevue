@@ -101,7 +101,7 @@ import ChevronLeftIcon from 'primevue/icons/chevronleft';
 import ChevronRightIcon from 'primevue/icons/chevronright';
 import ChevronUpIcon from 'primevue/icons/chevronup';
 import Ripple from 'primevue/ripple';
-import { DomHandler, ObjectUtils, UniqueComponentId } from 'primevue/utils';
+import { DomHandler, ObjectUtils } from 'primevue/utils';
 import BaseCarousel from './BaseCarousel.vue';
 
 export default {
@@ -152,7 +152,7 @@ export default {
     mounted() {
         let stateChanged = false;
 
-        this.$el.setAttribute(this.attributeSelector, '');
+        this.$el.setAttribute(this.id, '');
         this.createStyle();
         this.calculatePosition();
 
@@ -549,7 +549,7 @@ export default {
             }
 
             let innerHTML = `
-                .p-carousel[${this.attributeSelector}] .p-carousel-item {
+                .p-carousel[${this.id}] .p-carousel-item {
                     flex: 1 0 ${100 / this.d_numVisible}%
                 }
             `;
@@ -570,7 +570,7 @@ export default {
 
                     innerHTML += `
                         @media screen and (max-width: ${res.breakpoint}) {
-                            .p-carousel[${this.attributeSelector}] .p-carousel-item {
+                            .p-carousel[${this.id}] .p-carousel-item {
                                 flex: 1 0 ${100 / res.numVisible}%
                             }
                         }
@@ -620,9 +620,6 @@ export default {
         },
         ariaNextButtonLabel() {
             return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.nextPageLabel : undefined;
-        },
-        attributeSelector() {
-            return UniqueComponentId();
         }
     },
     components: {

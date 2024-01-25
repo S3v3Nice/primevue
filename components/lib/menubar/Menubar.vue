@@ -55,7 +55,7 @@
 
 <script>
 import BarsIcon from 'primevue/icons/bars';
-import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from 'primevue/utils';
+import { DomHandler, ObjectUtils, ZIndexUtils } from 'primevue/utils';
 import BaseMenubar from './BaseMenubar.vue';
 import MenubarSub from './MenubarSub.vue';
 
@@ -66,7 +66,6 @@ export default {
     matchMediaListener: null,
     data() {
         return {
-            id: this.$attrs.id,
             mobileActive: false,
             focused: false,
             focusedItemInfo: { index: -1, level: 0, parentKey: '' },
@@ -77,9 +76,6 @@ export default {
         };
     },
     watch: {
-        '$attrs.id': function (newValue) {
-            this.id = newValue || UniqueComponentId();
-        },
         activeItemPath(newPath) {
             if (ObjectUtils.isNotEmpty(newPath)) {
                 this.bindOutsideClickListener();
@@ -94,7 +90,6 @@ export default {
     container: null,
     menubar: null,
     mounted() {
-        this.id = this.id || UniqueComponentId();
         this.bindMatchMediaListener();
     },
     beforeUnmount() {

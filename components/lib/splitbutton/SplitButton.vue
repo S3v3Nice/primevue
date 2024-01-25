@@ -34,7 +34,7 @@
             :disabled="disabled"
             aria-haspopup="true"
             :aria-expanded="isExpanded"
-            :aria-controls="ariaId + '_overlay'"
+            :aria-controls="id + '_overlay'"
             @click="onDropdownButtonClick"
             @keydown="onDropdownKeydown"
             :severity="severity"
@@ -52,7 +52,7 @@
                 </slot>
             </template>
         </PVSButton>
-        <PVSMenu ref="menu" :id="ariaId + '_overlay'" :model="model" :popup="true" :autoZIndex="autoZIndex" :baseZIndex="baseZIndex" :appendTo="appendTo" :unstyled="unstyled" :pt="ptm('menu')">
+        <PVSMenu ref="menu" :id="id + '_overlay'" :model="model" :popup="true" :autoZIndex="autoZIndex" :baseZIndex="baseZIndex" :appendTo="appendTo" :unstyled="unstyled" :pt="ptm('menu')">
             <template v-if="$slots.menuitemicon" #itemicon="slotProps">
                 <slot name="menuitemicon" :item="slotProps.item" :class="slotProps.class" />
             </template>
@@ -67,7 +67,6 @@
 import Button from 'primevue/button';
 import ChevronDownIcon from 'primevue/icons/chevrondown';
 import TieredMenu from 'primevue/tieredmenu';
-import { UniqueComponentId } from 'primevue/utils';
 import BaseSplitButton from './BaseSplitButton.vue';
 
 export default {
@@ -108,9 +107,6 @@ export default {
         }
     },
     computed: {
-        ariaId() {
-            return UniqueComponentId();
-        },
         containerClass() {
             return [this.cx('root'), this.class];
         }

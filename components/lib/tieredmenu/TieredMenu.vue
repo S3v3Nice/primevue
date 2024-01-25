@@ -41,7 +41,7 @@
 <script>
 import OverlayEventBus from 'primevue/overlayeventbus';
 import Portal from 'primevue/portal';
-import { ConnectedOverlayScrollHandler, DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils } from 'primevue/utils';
+import { ConnectedOverlayScrollHandler, DomHandler, ObjectUtils, ZIndexUtils } from 'primevue/utils';
 import BaseTieredMenu from './BaseTieredMenu.vue';
 import TieredMenuSub from './TieredMenuSub.vue';
 
@@ -60,7 +60,6 @@ export default {
     searchValue: null,
     data() {
         return {
-            id: this.$attrs.id,
             focused: false,
             focusedItemInfo: { index: -1, level: 0, parentKey: '' },
             activeItemPath: [],
@@ -70,9 +69,6 @@ export default {
         };
     },
     watch: {
-        '$attrs.id': function (newValue) {
-            this.id = newValue || UniqueComponentId();
-        },
         activeItemPath(newPath) {
             if (!this.popup) {
                 if (ObjectUtils.isNotEmpty(newPath)) {
@@ -84,9 +80,6 @@ export default {
                 }
             }
         }
-    },
-    mounted() {
-        this.id = this.id || UniqueComponentId();
     },
     beforeUnmount() {
         this.unbindOutsideClickListener();

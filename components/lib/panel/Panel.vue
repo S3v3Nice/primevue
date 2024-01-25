@@ -1,20 +1,20 @@
 <template>
     <div :class="cx('root')" v-bind="ptm('root')" data-pc-name="panel">
         <div :class="cx('header')" v-bind="ptm('header')">
-            <slot :id="ariaId + '_header'" name="header" :class="cx('title')">
-                <span v-if="header" :id="ariaId + '_header'" :class="cx('title')" v-bind="ptm('title')">{{ header }}</span>
+            <slot :id="id + '_header'" name="header" :class="cx('title')">
+                <span v-if="header" :id="id + '_header'" :class="cx('title')" v-bind="ptm('title')">{{ header }}</span>
             </slot>
             <div :class="cx('icons')" v-bind="ptm('icons')">
                 <slot name="icons"></slot>
                 <button
                     v-if="toggleable"
-                    :id="ariaId + '_header'"
+                    :id="id + '_header'"
                     v-ripple
                     type="button"
                     role="button"
                     :class="cx('toggler')"
                     :aria-label="buttonAriaLabel"
-                    :aria-controls="ariaId + '_content'"
+                    :aria-controls="id + '_content'"
                     :aria-expanded="!d_collapsed"
                     @click="toggle"
                     @keydown="onKeyDown"
@@ -27,7 +27,7 @@
             </div>
         </div>
         <transition name="p-toggleable-content" v-bind="ptm('transition')">
-            <div v-show="!d_collapsed" :id="ariaId + '_content'" :class="cx('toggleablecontent')" role="region" :aria-labelledby="ariaId + '_header'" v-bind="ptm('toggleablecontent')">
+            <div v-show="!d_collapsed" :id="id + '_content'" :class="cx('toggleablecontent')" role="region" :aria-labelledby="id + '_header'" v-bind="ptm('toggleablecontent')">
                 <div :class="cx('content')" v-bind="ptm('content')">
                     <slot></slot>
                 </div>
@@ -43,7 +43,6 @@
 import MinusIcon from 'primevue/icons/minus';
 import PlusIcon from 'primevue/icons/plus';
 import Ripple from 'primevue/ripple';
-import { UniqueComponentId } from 'primevue/utils';
 import BasePanel from './BasePanel.vue';
 
 export default {
@@ -77,9 +76,6 @@ export default {
         }
     },
     computed: {
-        ariaId() {
-            return UniqueComponentId();
-        },
         buttonAriaLabel() {
             return this.toggleButtonProps && this.toggleButtonProps.ariaLabel ? this.toggleButtonProps.ariaLabel : this.header;
         }

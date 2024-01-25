@@ -125,7 +125,7 @@
 import { FilterService } from 'primevue/api';
 import SearchIcon from 'primevue/icons/search';
 import Ripple from 'primevue/ripple';
-import { DomHandler, ObjectUtils, UniqueComponentId } from 'primevue/utils';
+import { DomHandler, ObjectUtils } from 'primevue/utils';
 import VirtualScroller from 'primevue/virtualscroller';
 import BaseListbox from './BaseListbox.vue';
 
@@ -141,22 +141,17 @@ export default {
     searchValue: '',
     data() {
         return {
-            id: this.$attrs.id,
             filterValue: null,
             focused: false,
             focusedOptionIndex: -1
         };
     },
     watch: {
-        '$attrs.id': function (newValue) {
-            this.id = newValue || UniqueComponentId();
-        },
         options() {
             this.autoUpdateModel();
         }
     },
     mounted() {
-        this.id = this.id || UniqueComponentId();
         this.autoUpdateModel();
     },
     methods: {

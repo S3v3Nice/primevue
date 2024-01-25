@@ -6,10 +6,6 @@ export default {
     name: 'BaseVirtualScroller',
     extends: BaseComponent,
     props: {
-        id: {
-            type: String,
-            default: null
-        },
         style: null,
         class: null,
         items: {

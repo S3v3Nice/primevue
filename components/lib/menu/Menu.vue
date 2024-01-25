@@ -21,7 +21,7 @@
                 >
                     <template v-for="(item, i) of model" :key="label(item) + i.toString()">
                         <template v-if="item.items && visible(item) && !item.separator">
-                            <li v-if="item.items" :id="id + '_' + i" :class="[cx('submenuHeader'), item.class]" role="none" v-bind="ptm('submenuHeader')">
+                            <li v-if="item.items" :itemId="id + '_' + i" :class="[cx('submenuHeader'), item.class]" role="none" v-bind="ptm('submenuHeader')">
                                 <slot name="submenuheader" :item="item">{{ label(item) }}</slot>
                             </li>
                             <template v-for="(child, j) of item.items" :key="child.label + i + '_' + j">
@@ -30,7 +30,7 @@
                             </template>
                         </template>
                         <li v-else-if="visible(item) && item.separator" :key="'separator' + i.toString()" :class="[cx('separator'), item.class]" :style="item.style" role="separator" v-bind="ptm('separator')"></li>
-                        <PVMenuitem v-else :key="label(item) + i.toString()" :id="id + '_' + i" :item="item" :index="i" :templates="$slots" :focusedOptionId="focusedOptionId" @item-click="itemClick" :pt="pt" />
+                        <PVMenuitem v-else :key="label(item) + i.toString()" :itemId="id + '_' + i" :item="item" :index="i" :templates="$slots" :focusedOptionId="focusedOptionId" @item-click="itemClick" :pt="pt" />
                     </template>
                 </ul>
                 <div v-if="$slots.end" :class="cx('end')" v-bind="ptm('end')">
@@ -44,7 +44,7 @@
 <script>
 import OverlayEventBus from 'primevue/overlayeventbus';
 import Portal from 'primevue/portal';
-import { ConnectedOverlayScrollHandler, DomHandler, UniqueComponentId, ZIndexUtils } from 'primevue/utils';
+import { ConnectedOverlayScrollHandler, DomHandler, ZIndexUtils } from 'primevue/utils';
 import BaseMenu from './BaseMenu.vue';
 import Menuitem from './Menuitem.vue';
 
@@ -55,17 +55,11 @@ export default {
     emits: ['show', 'hide', 'focus', 'blur'],
     data() {
         return {
-            id: this.$attrs.id,
             overlayVisible: false,
             focused: false,
             focusedOptionIndex: -1,
             selectedOptionIndex: -1
         };
-    },
-    watch: {
-        '$attrs.id': function (newValue) {
-            this.id = newValue || UniqueComponentId();
-        }
     },
     target: null,
     outsideClickListener: null,
@@ -74,8 +68,6 @@ export default {
     container: null,
     list: null,
     mounted() {
-        this.id = this.id || UniqueComponentId();
-
         if (!this.popup) {
             this.bindResizeListener();
             this.bindOutsideClickListener();

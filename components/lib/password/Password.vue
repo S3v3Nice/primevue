@@ -56,7 +56,7 @@ import EyeSlashIcon from 'primevue/icons/eyeslash';
 import InputText from 'primevue/inputtext';
 import OverlayEventBus from 'primevue/overlayeventbus';
 import Portal from 'primevue/portal';
-import { ConnectedOverlayScrollHandler, DomHandler, UniqueComponentId, ZIndexUtils } from 'primevue/utils';
+import { ConnectedOverlayScrollHandler, DomHandler, ZIndexUtils } from 'primevue/utils';
 import BasePassword from './BasePassword.vue';
 
 export default {
@@ -289,7 +289,7 @@ export default {
             return this.promptLabel || this.$primevue.config.locale.passwordPrompt;
         },
         panelUniqueId() {
-            return UniqueComponentId() + '_panel';
+            return this.id + '_panel';
         }
     },
     components: {

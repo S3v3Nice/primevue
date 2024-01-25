@@ -231,7 +231,7 @@ import AngleLeftIcon from 'primevue/icons/angleleft';
 import AngleRightIcon from 'primevue/icons/angleright';
 import AngleUpIcon from 'primevue/icons/angleup';
 import Ripple from 'primevue/ripple';
-import { DomHandler, ObjectUtils, UniqueComponentId } from 'primevue/utils';
+import { DomHandler, ObjectUtils } from 'primevue/utils';
 import BasePickList from './BasePickList.vue';
 
 export default {
@@ -245,7 +245,6 @@ export default {
     mediaChangeListener: null,
     data() {
         return {
-            id: this.$attrs.id,
             d_selection: this.selection,
             focused: {
                 sourceList: false,
@@ -256,9 +255,6 @@ export default {
         };
     },
     watch: {
-        '$attrs.id': function (newValue) {
-            this.id = newValue || UniqueComponentId();
-        },
         selection(newValue) {
             this.d_selection = newValue;
         },
@@ -279,8 +275,6 @@ export default {
         this.destroyMedia();
     },
     mounted() {
-        this.id = this.id || UniqueComponentId();
-
         if (this.responsive) {
             this.createStyle();
             this.initMedia();
@@ -930,7 +924,7 @@ export default {
             return this.modelValue && this.modelValue[1] ? this.modelValue[1] : null;
         },
         attributeSelector() {
-            return UniqueComponentId();
+            return `${this.id}_attributeSelector`;
         },
         moveUpAriaLabel() {
             return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.moveUp : undefined;

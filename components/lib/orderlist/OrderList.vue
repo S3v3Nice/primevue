@@ -84,7 +84,7 @@ import AngleDoubleUpIcon from 'primevue/icons/angledoubleup';
 import AngleDownIcon from 'primevue/icons/angledown';
 import AngleUpIcon from 'primevue/icons/angleup';
 import Ripple from 'primevue/ripple';
-import { DomHandler, ObjectUtils, UniqueComponentId } from 'primevue/utils';
+import { DomHandler, ObjectUtils } from 'primevue/utils';
 import BaseOrderList from './BaseOrderList.vue';
 
 export default {
@@ -97,16 +97,10 @@ export default {
     list: null,
     data() {
         return {
-            id: this.$attrs.id,
             d_selection: this.selection,
             focused: false,
             focusedOptionIndex: -1
         };
-    },
-    watch: {
-        '$attrs.id': function (newValue) {
-            this.id = newValue || UniqueComponentId();
-        }
     },
     beforeUnmount() {
         this.destroyStyle();
@@ -118,8 +112,6 @@ export default {
         }
     },
     mounted() {
-        this.id = this.id || UniqueComponentId();
-
         if (this.responsive) {
             this.createStyle();
         }
@@ -562,7 +554,7 @@ export default {
     },
     computed: {
         attributeSelector() {
-            return UniqueComponentId();
+            return this.id + '_attributeSelector';
         },
         focusedOptionId() {
             return this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : null;

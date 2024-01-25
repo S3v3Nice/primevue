@@ -6,10 +6,6 @@ export default {
     name: 'BaseGalleria',
     extends: BaseComponent,
     props: {
-        id: {
-            type: String,
-            default: null
-        },
         value: {
             type: Array,
             default: null

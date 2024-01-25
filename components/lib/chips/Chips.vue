@@ -58,7 +58,6 @@
 
 <script>
 import TimesCircleIcon from 'primevue/icons/timescircle';
-import { UniqueComponentId } from 'primevue/utils';
 import BaseChips from './BaseChips.vue';
 
 export default {
@@ -67,7 +66,6 @@ export default {
     emits: ['update:modelValue', 'add', 'remove', 'focus', 'blur'],
     data() {
         return {
-            id: UniqueComponentId(),
             inputValue: null,
             focused: false,
             focusedIndex: null

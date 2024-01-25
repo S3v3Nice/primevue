@@ -283,7 +283,7 @@ import ArrowDownIcon from 'primevue/icons/arrowdown';
 import ArrowUpIcon from 'primevue/icons/arrowup';
 import SpinnerIcon from 'primevue/icons/spinner';
 import Paginator from 'primevue/paginator';
-import { DomHandler, HelperSet, ObjectUtils, UniqueComponentId } from 'primevue/utils';
+import { DomHandler, HelperSet, ObjectUtils } from 'primevue/utils';
 import VirtualScroller from 'primevue/virtualscroller';
 import BaseDataTable from './BaseDataTable.vue';
 import TableBody from './TableBody.vue';
@@ -418,7 +418,7 @@ export default {
         }
     },
     mounted() {
-        this.$el.setAttribute(this.attributeSelector, '');
+        this.$el.setAttribute(this.id, '');
 
         if (this.responsiveLayout === 'stack' && !this.scrollable && !this.unstyled) {
             this.createResponsiveStyle();
@@ -1301,7 +1301,7 @@ export default {
             this.createStyleElement();
 
             let innerHTML = '';
-            let selector = `[data-pc-name="datatable"][${this.attributeSelector}] > [data-pc-section="wrapper"] ${this.virtualScrollerDisabled ? '' : '> [data-pc-name="virtualscroller"]'} > table[data-pc-section="table"]`;
+            let selector = `[data-pc-name="datatable"][${this.id}] > [data-pc-section="wrapper"] ${this.virtualScrollerDisabled ? '' : '> [data-pc-name="virtualscroller"]'} > table[data-pc-section="table"]`;
 
             widths.forEach((width, index) => {
                 let colWidth = index === colIndex ? newColumnWidth : nextColumnWidth && index === colIndex + 1 ? nextColumnWidth : width;
@@ -1768,7 +1768,7 @@ export default {
             this.createStyleElement();
 
             let innerHTML = '';
-            let selector = `[data-pc-name="datatable"][${this.attributeSelector}] > [data-pc-section="wrapper"] ${this.virtualScrollerDisabled ? '' : '> [data-pc-name="virtualscroller"]'} > table[data-pc-section="table"]`;
+            let selector = `[data-pc-name="datatable"][${this.id}] > [data-pc-section="wrapper"] ${this.virtualScrollerDisabled ? '' : '> [data-pc-name="virtualscroller"]'} > table[data-pc-section="table"]`;
 
             widths.forEach((width, index) => {
                 let style = `width: ${width}px !important; max-width: ${width}px !important`;
@@ -1913,8 +1913,8 @@ export default {
                 document.head.appendChild(this.responsiveStyleElement);
 
                 let tableSelector = `.p-datatable-wrapper ${this.virtualScrollerDisabled ? '' : '> .p-virtualscroller'} > .p-datatable-table`;
-                let selector = `.p-datatable[${this.attributeSelector}] > ${tableSelector}`;
-                let gridLinesSelector = `.p-datatable[${this.attributeSelector}].p-datatable-gridlines > ${tableSelector}`;
+                let selector = `.p-datatable[${this.id}] > ${tableSelector}`;
+                let gridLinesSelector = `.p-datatable[${this.id}].p-datatable-gridlines > ${tableSelector}`;
                 let innerHTML = `
 @media screen and (max-width: ${this.breakpoint}) {
     ${selector} > .p-datatable-thead > tr > th,
@@ -2059,9 +2059,6 @@ export default {
 
                 return ObjectUtils.isNotEmpty(val) && this.selection && Array.isArray(this.selection) && val.every((v) => this.selection.some((s) => this.equals(s, v)));
             }
-        },
-        attributeSelector() {
-            return UniqueComponentId();
         },
         groupRowSortField() {
             return this.sortMode === 'single' ? this.sortField : this.d_groupRowsSortMeta ? this.d_groupRowsSortMeta.field : null;
